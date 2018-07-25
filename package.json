@@ -1,0 +1,23 @@
+{
+  "name": "bapcs-3c-checker",
+  "version": "1.0.0",
+  "description": "Reddit bot for checking link against camelcamelcamel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stellarashes/bapcs-3c-checker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stellarashes/bapcs-3c-checker/issues"
+  },
+  "homepage": "https://github.com/stellarashes/bapcs-3c-checker#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "snoowrap": "^1.15.2"
+  }
+}
