@@ -21,8 +21,13 @@ module.exports = class CamelClient {
 
         try {
             const page = cheerio.load(result.data);
-            const highest = page('#section_amazon .highest_price'),
-                lowest = page('#section_amazon .lowest_price');
+            const amazonSection = page('#section_amazon');
+            if (!amazonSection.length) {
+                return null;
+            }
+
+            const highest = amazonSection.find('.highest_price'),
+                lowest = amazonSection.find('.lowest_price');
 
             return {
                 post,

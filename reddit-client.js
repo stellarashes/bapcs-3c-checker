@@ -20,11 +20,9 @@ module.exports = class RedditClient {
     }
 
     static async postComment(camelInfoWithPost) {
-        // for now, only use a post on playground
-
         const commentContent = this.format(camelInfoWithPost);
-        await r.getSubmission('91xdya')
-            .reply(commentContent);
+        console.log(`Posting reply to ${camelInfoWithPost.post.title} (${camelInfoWithPost.post.id})`);
+        await camelInfoWithPost.post.reply(commentContent);
     }
 
     static format(camelInfo) {
