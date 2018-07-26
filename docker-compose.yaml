@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  bapcs3cchecker:
+    build:
+      context: .
+    restart: always
+    env_file: .env
+    external_links:
+      - mysql
