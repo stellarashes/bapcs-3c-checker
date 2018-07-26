@@ -21,8 +21,8 @@ module.exports = class RedditClient {
 
     static async postComment(camelInfoWithPost) {
         const commentContent = this.format(camelInfoWithPost);
-        console.log(`Posting reply to ${camelInfoWithPost.post.title} (${camelInfoWithPost.post.id})`);
         await camelInfoWithPost.post.reply(commentContent);
+        console.log(`Posted reply to ${camelInfoWithPost.post.title} (${cmelInfoWithPost.post.id})`);
     }
 
     static format(camelInfo) {
