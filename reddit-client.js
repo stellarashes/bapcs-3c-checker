@@ -36,7 +36,7 @@ Highest|${this.formatPrice(camelInfo.highest)}
 [3C link](${camelInfo.url})
 
 *****
-I am a bot; please send comments/questions to /u/stellarashes
+I am a bot; please send comments/questions to github issues
 
 [github](https://github.com/stellarashes/bapcs-3c-checker)`
     }
