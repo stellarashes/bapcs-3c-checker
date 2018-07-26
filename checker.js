@@ -22,6 +22,7 @@ module.exports = class Checker {
                 }));
             } catch (e) {
                 console.error(e);
+                await delay(60000);
             } finally {
                 await delay(30000);
             }
