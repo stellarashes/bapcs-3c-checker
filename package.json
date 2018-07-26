@@ -4,7 +4,8 @@
   "description": "Reddit bot for checking link against camelcamelcamel",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/stellarashes/bapcs-3c-checker#readme",
   "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
     "dotenv": "^6.0.0",
     "snoowrap": "^1.15.2"
   }
