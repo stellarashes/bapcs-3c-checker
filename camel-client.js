@@ -25,14 +25,12 @@ module.exports = class CamelClient {
             if (!amazonSection.length) {
                 return null;
             }
-
-            const highest = amazonSection.find('.highest_price'),
-                lowest = amazonSection.find('.lowest_price');
+            const thirdPartySection = page('#section_new');
 
             return {
                 post,
-                highest: this.getCellValue(highest),
-                lowest: this.getCellValue(lowest),
+                amazon: this.getSectionPrice(amazonSection),
+                thirdPartyNew: this.getSectionPrice(thirdPartySection),
                 url: `https://camelcamelcamel.com${result.request.path}`,
             };
         } catch (e) {
@@ -41,6 +39,20 @@ module.exports = class CamelClient {
         }
 
         return null;
+    }
+
+    static getSectionPrice(section) {
+        if (!section.length) {
+            return null;
+        }
+
+        const highest = section.find('.highest_price'),
+            lowest = section.find('.lowest_price');
+
+        return {
+            highest: this.getCellValue(highest),
+            lowest: this.getCellValue(lowest),
+        };
     }
 
     static getCellValue(parentCell) {

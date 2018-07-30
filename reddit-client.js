@@ -26,10 +26,10 @@ module.exports = class RedditClient {
     }
 
     static format(camelInfo) {
-        return `Type|Price|When
+        return `Type|Amazon|3rd Party New
 :---|:---|:---
-Lowest|${this.formatPrice(camelInfo.lowest)}
-Highest|${this.formatPrice(camelInfo.highest)}
+Lowest|${this.formatPrice(camelInfo.amazon.lowest)}|${this.formatPrice(camelInfo.thirdPartyNew.lowest)}
+Highest|${this.formatPrice(camelInfo.amazon.highest)}|${this.formatPrice(camelInfo.thirdPartyNew.highest)}
 
 [3C link](${camelInfo.url})
 
@@ -41,9 +41,9 @@ I am a bot; please send comments/questions to github issues
 
     static formatPrice(priceInfo) {
         if (priceInfo) {
-            return `${priceInfo.price}|${priceInfo.date}`;
+            return `${priceInfo.price} on ${priceInfo.date}`;
         }
 
-        return 'Unknown|';
+        return 'Unknown';
     }
 }
