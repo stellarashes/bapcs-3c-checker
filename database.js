@@ -13,6 +13,10 @@ sequelize.sync();
 
 module.exports = class Database {
     static async findNotProcessed(posts) {
+        if (process.env.NODE_ENV === 'development') {
+            return posts;
+        }
+
         const postIds = posts.map(p => p.id);
         const entries = await Entries.findAll({
             where: {
@@ -25,6 +29,10 @@ module.exports = class Database {
     }
 
     static async addProcessed(post) {
+        if (process.env.NODE_ENV === 'development') {
+            console.log(`dev adds ${post.id}`);
+            return;
+        }
         const entry = {submissionId: post.id};
         await Entries.create(entry);
     }

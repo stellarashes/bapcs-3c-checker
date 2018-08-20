@@ -2,12 +2,13 @@ const URL = require('url');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const matchingHosts = [/\bamazon\.com$/i, /\ba\.co$/i]
+
 module.exports = class CamelClient {
-    static matchingHosts = [/\bamazon\.com$/i, /\ba\.co$/i]
     static isAmazonUrl(url) {
         try {
             const parsed = URL.parse(url);
-            return this.matchingHosts.some(match => parsed.hostname.match(match));
+            return matchingHosts.some(match => parsed.hostname.match(match));
         } catch (e) {
             return false;
         }
@@ -28,15 +29,13 @@ module.exports = class CamelClient {
             }
             const thirdPartySection = page('#section_new');
 
-            
-
             const amazonPrice = this.getSectionPrice(amazonSection);
             const thirdPartyNewPrice = this.getSectionPrice(thirdPartySection);
 
-            if (!amazonPrice && !thirdPartyNewPrice) {
+            if (!amazonPrice.lowest && !thirdPartyNewPrice.lowest) {
                 return null;
             }
-            
+
             return {
                 post,
                 amazon: amazonPrice,
