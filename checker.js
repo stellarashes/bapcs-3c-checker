@@ -15,11 +15,18 @@ module.exports = class Checker {
                 const commentsToBePosted =
                     (await Promise.all(toBePosted.map(post => CamelClient.getCamelInfo(post))))
                         .filter(x => !!x);
+                
+                const notRechecking = toBePosted.filter(post => !commentsToBePosted.some(x => post.id === x.id));
+                const promiseAddNotChecking = Promise.all(notRechecking.map(post => Database.addProcessed(post)));
 
-                await Promise.all(commentsToBePosted.map(async data => {
+                const promisePosts = Promise.all(commentsToBePosted.map(async data => {
                     await RedditClient.postComment(data);
+
                     await Database.addProcessed(data.post);
                 }));
+
+                await promiseAddNotChecking;
+                await promisePosts;
             } catch (e) {
                 console.error(e);
                 await delay(60000);

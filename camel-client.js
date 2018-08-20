@@ -3,10 +3,11 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 module.exports = class CamelClient {
+    static matchingHosts = [/\bamazon\.com$/i, /\ba\.co$/i]
     static isAmazonUrl(url) {
         try {
             const parsed = URL.parse(url);
-            return parsed.hostname.match(/\bamazon\.com$/i);
+            return this.matchingHosts.some(match => parsed.hostname.match(match));
         } catch (e) {
             return false;
         }
@@ -27,10 +28,19 @@ module.exports = class CamelClient {
             }
             const thirdPartySection = page('#section_new');
 
+            
+
+            const amazonPrice = this.getSectionPrice(amazonSection);
+            const thirdPartyNewPrice = this.getSectionPrice(thirdPartySection);
+
+            if (!amazonPrice && !thirdPartyNewPrice) {
+                return null;
+            }
+            
             return {
                 post,
-                amazon: this.getSectionPrice(amazonSection),
-                thirdPartyNew: this.getSectionPrice(thirdPartySection),
+                amazon: amazonPrice,
+                thirdPartyNew: thirdPartyNewPrice,
                 url: `https://camelcamelcamel.com${result.request.path}`,
             };
         } catch (e) {
