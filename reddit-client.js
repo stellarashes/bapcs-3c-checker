@@ -44,6 +44,6 @@ I am a bot; please send comments/questions to github issues
             return `${priceInfo.price} on ${priceInfo.date}`;
         }
 
-        return 'Unknown';
+        return 'N/A';
     }
 }
